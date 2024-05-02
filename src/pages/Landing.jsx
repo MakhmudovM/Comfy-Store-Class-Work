@@ -1,10 +1,10 @@
-import React from 'react'
+
+import { Hero } from '../components'
 
 function Landing() {
   return (
-    <div>
-        <h1>Landing</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, aliquam.</p>
+    <div className='align-content mt-10'>
+        <Hero/>
     </div>
   )
 }
