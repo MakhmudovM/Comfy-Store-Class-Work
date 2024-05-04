@@ -1,5 +1,9 @@
 import { createBrowserRouter , RouterProvider ,  } from "react-router-dom"
-import { About, Cart, Chekout, HomeLayout, Landing, Login, Products, Register, SingleProduct, Error, Orders } from "./pages"
+import { ErrorElement } from "./components"
+import { About, Cart, Chekout, HomeLayout, Landing, Login, Products, Register, SingleProduct, Error, Orders,  } from "./pages"
+import { loader as LandingLoader } from "./pages/Landing"
+import { loader as SingleProductLoader } from "./pages/SingleProduct"
+
 
 //pages
 
@@ -12,15 +16,18 @@ export default function App() {
       children: [
         {
           index: true,
-          element: <Landing/>
+          element: <Landing/>,
+          errorElement:<ErrorElement/>,
+          loader: LandingLoader ,
         },
         {
           path:"/products",
           element: <Products/>
         },
         {
-          path:"/product/:id",
-          element:<SingleProduct/>
+          path:"/products/:id",
+          element:<SingleProduct/>,
+          loader: SingleProductLoader,
         },
         {
           path: "/cart",

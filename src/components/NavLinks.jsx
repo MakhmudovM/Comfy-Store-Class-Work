@@ -39,7 +39,7 @@ function NavLinks() {
     <>
     {links.map((link) => {
         return (
-            <li> <NavLink className="capitalize" key={link.id} to={link.url}>
+            <li  key={link.id}> <NavLink className="capitalize" to={link.url}>
             {link.text}
         </NavLink>
         </li>
