@@ -3,6 +3,8 @@ import { ErrorElement } from "./components"
 import { About, Cart, Chekout, HomeLayout, Landing, Login, Products, Register, SingleProduct, Error, Orders,  } from "./pages"
 import { loader as LandingLoader } from "./pages/Landing"
 import { loader as SingleProductLoader } from "./pages/SingleProduct"
+import { loader as ProductsLoader } from "./pages/Products"
+
 
 
 //pages
@@ -22,7 +24,8 @@ export default function App() {
         },
         {
           path:"/products",
-          element: <Products/>
+          element: <Products/>,
+          loader : ProductsLoader,
         },
         {
           path:"/products/:id",
