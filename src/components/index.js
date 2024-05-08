@@ -14,6 +14,8 @@ export { default as Filters } from './Filters'
 export { default as FormSelect } from './FormSelect'
 export { default as FormRange } from './FormRange'
 export { default as FormCheckBox } from './FormCheckBox'
+export { default as PaginationContainer } from './PaginationContainer'
+
 
 
 

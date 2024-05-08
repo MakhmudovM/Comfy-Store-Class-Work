@@ -1,7 +1,12 @@
 import { useLoaderData , Link } from "react-router-dom"
-import { customFetch, formatPrice } from "../utils"
 import { useState } from "react"
+
+import { customFetch, formatPrice } from "../utils"
 import { generateAmountOptions } from "../utils"
+
+import { useDispatch } from "react-redux"
+import { addItem } from "../features/cart/cartSlice"
+
 
 export const loader = async (params) => {
   const request = await customFetch(`/products/${params.params.id}`);
@@ -9,11 +14,28 @@ export const loader = async (params) => {
 }
 
 function SingleProduct() {
+  const dispatch = useDispatch();
   const {product} = useLoaderData();
   const {image, title, description, price, colors, company} = product.attributes;
   const dollarAmount = formatPrice(price);
   const [productColor , setProductColor ] = useState(colors[0]);
   const [amount , setAmount ] = useState(0);
+
+  //object create for redux
+
+  const cartProduct = {
+    cartID: product.id,
+    image,
+    title,
+    price,
+    amount,
+    productColor,
+    company,
+  }
+
+  const addToCart = () => {
+    dispatch(addItem({product: cartProduct}));
+  }
   return (
     <section className="align-content">
       <div className="text-md breadcrumbs">
@@ -49,7 +71,7 @@ function SingleProduct() {
             </label>
             <select className="select select-secondary select-bordered select-md" value={amount} onChange={(e) => setAmount(e.target.value)}>{generateAmountOptions(20)}</select>
           </div>
-          <div className="mt-10"><button onClick={() =>console.log("add to bag")} className="btn btn-secondary btn-md">Add to bag</button></div>
+          <div className="mt-10"><button onClick={addToCart} className="btn btn-secondary btn-md">Add to bag</button></div>
         </div>
       </div>
     </section>
