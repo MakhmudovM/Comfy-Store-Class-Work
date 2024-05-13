@@ -31,9 +31,33 @@ reducers: {
         localStorage.setItem("cart" , JSON.stringify(state));
         toast.success("Item added to curt")
     },
-    clearCart: (state) => {},
-    removeItem: (state , {paylad}) => {},
-    editItem: (state , {paylad}) => {},
+    clearCart: (state) => {
+        localStorage.setItem("cart", JSON.stringify(defaultState));
+        return defaultState;
+    },
+    removeItem: (state , {paylad}) => {
+        const {cartID} = paylad;
+        const product = state.cartItems.find((i) => i.cartID === cartID);
+        state.cartItems = state.cartItems.filter((i) => i.cartID !== cartID);
+
+        state.numItemsInCart -= product.amount;
+        cartSlice.caseReducers.calulateTotal(state);
+        toast.success("Cart update")
+    },
+    editItem: (state , {paylad}) => {
+        const { cartID , amount } = paylad;
+        const item = state.cartItems.find((i) => i.cartID === cartID);
+        state.numItemsInCart += amount - item.amount;
+        state.cartTotal += item.price * (amount - item.amount);
+        item.amount = amount;
+        cartSlice.caseReducers.calulateTotal(state);
+        toast.success("Cart update")
+    },
+    calulateTotal: ( state ) => {
+        state.tax = 0.1 * state.cartTotal;
+        state.orderTotal = state.cartTotal + state.shipping + state.tax;
+        localStorage.setItem("cart", JSON.stringify(state))
+    }
 
 },
 });

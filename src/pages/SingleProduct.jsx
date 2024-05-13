@@ -60,7 +60,7 @@ function SingleProduct() {
           <p className="mt-6 leading-8">{description}</p>
           <div className="mt-2">
             {colors.map((color)=>{
-              return <button key={color} className={`badge w06 h-6 mr-2 ${color == productColor && "border-2 border-secondary"}`} style={{backgroundColor: color}} onClick={() => setProductColor(color)}></button>
+              return <button key={color} className={`badge w-6 h-6 mr-2 ${color == productColor && "border-2 border-secondary"}`} style={{backgroundColor: color}} onClick={() => setProductColor(color)}></button>
             })}
           </div>
 
